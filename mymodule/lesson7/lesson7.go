@@ -3,6 +3,8 @@ package lesson7
 import (
 	"fmt"
 	"strconv"
+	"os"
+	"time"
 )
 
 func Lesson7() {
@@ -196,6 +198,80 @@ func Lesson7() {
 	default:
 		fmt.Println("I don't know")
 	} // => 3 int
+
+
+	// ラベル付きfor
+	Loop:
+		for {
+			for {
+				for {
+					fmt.Println("start")
+					break Loop
+				}
+				fmt.Println("break 2")
+			}
+			fmt.Println("break 1")
+		}
+		fmt.Println("end") // => start end
+
+		for i := 0; i < 3; i++ {
+			for j := 1; j < 3; j++ {
+				if j > 1 {
+					continue
+				}
+				fmt.Println(i, j, i*j)
+			}
+			fmt.Println("end")
+		} // => 0 1 0, end, 1 1 1, end, 2 1 2, end
+
+		Loop2:
+			for i := 0; i < 3; i++ {
+				for j := 1; j < 3; j++ {
+					if j > 1 {
+						continue Loop2
+					}
+					fmt.Println(i, j, i*j)
+				}
+				fmt.Println("end")
+			} // => 0 1 0, 1 1 1, 2 1 2
+
+	// defer
+	TestDefer() // => START, END
+
+	defer func() {
+		fmt.Println("defer1")
+		fmt.Println("defer2")
+		fmt.Println("defer3")
+	}() // => main関数が終わった後に defer1, defer2, defer3
+
+	RunDefer() // => 3, 2, 1
+
+	file, err := os.Create("test.txt")
+	if err != nil {
+		fmt.Println(err)
+	}
+	defer file.Close()
+
+	file.Write([]byte("Hello")) // => test.txt に Hello が書き込まれる
+
+	// // panic & recover
+	// defer func() {
+	// 	if x := recover(); x != nil {
+	// 		fmt.Println(x)
+	// 	}
+	// }() // => runtime error
+	// panic("runtime error") // => panic: runtime error
+
+	// // Goの並行処理
+	// go sub() // ゴルーチン
+
+	// for {
+	// 	fmt.Println("main loop")
+	// 	time.Sleep(200 * time.Millisecond)
+	// }
+
+	// init
+	fmt.Println("main")
 }
 
 func anything(a interface{}) {
@@ -208,4 +284,27 @@ func anything(a interface{}) {
 	default:
 		fmt.Println("I don't know")
 	} // => Hello string, 1 int
+}
+
+func TestDefer(){
+	defer fmt.Println("END")
+	fmt.Println("START")
+}
+
+func RunDefer(){
+	defer fmt.Println("1")
+	defer fmt.Println("2")
+	defer fmt.Println("3")
+}
+
+func sub() {
+	for {
+		fmt.Println("sub loop")
+		time.Sleep(100 * time.Millisecond)
+	}
+}
+
+// init関数はmain関数よりも先に実行される
+func init() {
+	fmt.Println("init")
 }
