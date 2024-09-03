@@ -8,6 +8,7 @@ import (
 	"app/mymodule/lesson4"
 	"app/mymodule/lesson5"
 	"app/mymodule/lesson6"
+	"app/mymodule/lesson7"
 )
 
 func main() {
@@ -23,4 +24,6 @@ func main() {
 	lesson5.Lesson5()
 	fmt.Println("====== Lesson6 ======")
 	lesson6.Lesson6()
+	fmt.Println("====== Lesson7 ======")
+	lesson7.Lesson7()
 }
