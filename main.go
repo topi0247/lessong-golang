@@ -9,7 +9,8 @@ import (
 	// "app/mymodule/lesson5"
 	// "app/mymodule/lesson6"
 	// "app/mymodule/lesson7"
-	"app/mymodule/lesson8"
+	// "app/mymodule/lesson8"
+	"app/mymodule/lesson9"
 )
 
 func main() {
@@ -27,6 +28,8 @@ func main() {
 	// lesson6.Lesson6()
 	// fmt.Println("====== Lesson7 ======")
 	// lesson7.Lesson7()
-	fmt.Println("====== Lesson8 ======")
-	lesson8.Lesson8()
+	// fmt.Println("====== Lesson8 ======")
+	// lesson8.Lesson8()
+	fmt.Println("====== Lesson9 ======")
+	lesson9.Lesson9()
 }
